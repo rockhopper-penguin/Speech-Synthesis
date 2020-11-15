@@ -1,0 +1,10 @@
+version: "3"
+services:
+  voicetext:
+    image: python:3.7
+    command: pip3 install flask requests
+    tty: true
+    volumes:
+      - ./src:/src
+    ports:
+      - 5000:5000
