@@ -1,9 +1,11 @@
 version: "3"
 services:
   voicetext:
-    image: python:3.7
-    command: pip3 install flask requests
+    build: .
+    # image: python:3.7
+    # command: pip3 install flask requests
     tty: true
+    stdin_open: true
     volumes:
       - ./src:/src
     ports:
