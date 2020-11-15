@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <title>音声合成</title>
+  </head>
+  <body>
+    <h1>Voice Text音声合成</h1>
+    <div id="index-form">
+      <form action="/result" method="POST">
+        <div>
+          <span>APIキー：</span>
+          <span><input type="text" name="apiKey" class="input-box" /></span>
+        </div>
+        <div>
+          <span>テキスト：</span>
+          <span
+            ><input type="text" name="setText" class="input-box" id="text"
+          /></span>
+        </div>
+        <div>
+          <span>音声エンジン：</span>
+          <select name="setVoice" id="voice">
+            <option value="null" disabled selected>選択して下さい</option>
+            <option value="show">ショウ</option>
+            <option value="haruka">ハルカ</option>
+            <option value="hikari">ヒカリ</option>
+            <option value="takeru">タケル</option>
+            <option value="santa">サンタ</option>
+            <option value="bear">クマ</option>
+          </select>
+        </div>
+        <div>
+          <span>感情　※ショウ以外に設定できます：</span>
+          <select name="setEmotion" id="emotion">
+            <option value="null" disabled selected>選択して下さい</option>
+            <option value="happiness">喜</option>
+            <option value="anger">怒</option>
+            <option value="sadness">悲</option>
+          </select>
+        </div>
+        <div>
+          <span>感情レベル：</span>
+          <span>
+            <input
+              type="range"
+              name="setEmotionLevel"
+              value="2"
+              min="1"
+              max="4"
+              step="1"
+              oninput="document.getElementById('feedbackEmotionLevel').value=this.value"
+            />
+            <output id="feedbackEmotionLevel">2</output>
+          </span>
+        </div>
+        <div>
+          <span>ピッチ：</span>
+          <span>
+            <input
+              type="range"
+              name="setPitch"
+              value="100"
+              min="50"
+              max="200"
+              step="1"
+              oninput="document.getElementById('feedbackPitch').value=this.value"
+            />
+            <output id="feedbackPitch">100</output>
+          </span>
+        </div>
+        <div>
+          <span>スピード：</span>
+          <span>
+            <input
+              type="range"
+              name="setSpeed"
+              value="100"
+              min="50"
+              max="400"
+              step="1"
+              oninput="document.getElementById('feedbackSpeed').value=this.value"
+            />
+            <output id="feedbackSpeed">100</output>
+          </span>
+        </div>
+        <div>
+          <span>ボリューム：</span>
+          <span>
+            <input
+              type="range"
+              name="setVolume"
+              value="100"
+              min="50"
+              max="200"
+              step="1"
+              oninput="document.getElementById('feedbackVolume').value=this.value"
+            />
+            <output id="feedbackVolume">100</output>
+          </span>
+        </div>
+        <div id="sendBtn">
+          <input type="submit" value="送信" id="send" />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
