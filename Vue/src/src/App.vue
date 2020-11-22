@@ -5,4 +5,7 @@
 </template>
 
 <style>
+#app {
+  font-family: "Yu Gothic", "YuGothic", sans-serif;
+}
 </style>
