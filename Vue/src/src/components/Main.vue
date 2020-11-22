@@ -6,11 +6,14 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import VoiceText from "../src/VoiceText";
 
 @Component
 export default class Main extends Vue {
   constructor() {
     super();
+    const text = "ボイステキストクラス";
+    const voiceText = new VoiceText(text);
     console.log("テスト");
   }
 }
