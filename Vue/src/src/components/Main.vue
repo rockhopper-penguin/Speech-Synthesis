@@ -1,20 +1,26 @@
 <template>
-  <div>
+  <div id="main">
     <h1>Voice Text音声合成</h1>
     <form action="">
       <div>
         <ul>
           <li>
             <label for="">APIキー</label>
-            <input type="text" name="apiKey" id="" required />
+            <input type="text" name="apiKey" id="" v-model="apiKey" required />
           </li>
           <li>
             <label for="">テキスト</label>
-            <input type="text" name="text" id="" required />
+            <input type="text" name="text" id="" v-model="text" required />
           </li>
           <li>
             <label for="">スピーカー</label>
-            <select name="speaker" id="" required>
+            <select
+              name="speaker"
+              id=""
+              v-model="speaker"
+              @change="changeSpeaker"
+              required
+            >
               <option value="" disabled selected>選択して下さい</option>
               <option value="show">ショウ</option>
               <option value="haruka">ハルカ</option>
@@ -26,7 +32,12 @@
           </li>
           <li>
             <label for="">感情</label>
-            <select name="emotion" id="">
+            <select
+              name="emotion"
+              id=""
+              v-model="emotion"
+              v-bind:disabled="isShow"
+            >
               <option value="" disabled selected>選択して下さい</option>
               <option value="happiness">喜</option>
               <option value="anger">怒</option>
@@ -43,8 +54,9 @@
               min="1"
               max="4"
               step="1"
+              v-model="emotionLevel"
             />
-            <span></span>
+            <span>{{ emotionLevel }}</span>
           </li>
           <li>
             <label for="">ピッチ</label>
@@ -55,8 +67,9 @@
               min="50"
               max="200"
               step="1"
+              v-model="pitch"
             />
-            <span></span>
+            <span>{{ pitch }}</span>
           </li>
           <li>
             <label for="">スピード</label>
@@ -67,11 +80,12 @@
               min="50"
               max="400"
               step="1"
+              v-model="speed"
             />
-            <span></span>
+            <span>{{ speed }}</span>
           </li>
           <li>
-            <label for="ボリューム"></label>
+            <label for="">ボリューム</label>
             <input
               type="range"
               name="volume"
@@ -79,12 +93,15 @@
               min="50"
               max="200"
               step="1"
+              v-model="volume"
             />
-            <span></span>
+            <span>{{ volume }}</span>
           </li>
         </ul>
       </div>
-      <button type="submit">送信</button>
+      <div id="send-button">
+        <button type="submit" v-on:click="test">送信</button>
+      </div>
     </form>
   </div>
 </template>
@@ -95,13 +112,65 @@ import VoiceText from "../src/VoiceText";
 
 @Component
 export default class Main extends Vue {
+  /** APIキー */
+  private apiKey = "";
+  /** テキスト */
+  private text = "";
+  /** スピーカー */
+  private speaker = "";
+  /** 感情 */
+  private emotion = "";
+  /** 感情レベル */
+  private emotionLevel = 2;
+  /** ピッチ */
+  private pitch = 100;
+  /** スピード */
+  private speed = 100;
+  /** ボリューム */
+  private volume = 100;
+  /** 選択されたスピーカーがショウかどうか(ショウだと感情設定ができない) */
+  private isShow = false;
+
+  private voiceText: any;
   constructor() {
     super();
-    const text = "ボイステキストクラス";
-    const voiceText = new VoiceText(text);
+  }
+
+  test() {
+    alert(`apiKey : ${this.apiKey}`);
+  }
+
+  changeSpeaker() {
+    if (this.speaker == "show") {
+      this.isShow = true;
+      return;
+    }
+    this.isShow = false;
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+#main {
+  width: 80%;
+  margin: auto;
+}
+
+#main h1,
+#send-button {
+  text-align: center;
+}
+
+#send-button button {
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+ul li,
+label,
+span {
+  margin: 10px;
+}
+</style>
