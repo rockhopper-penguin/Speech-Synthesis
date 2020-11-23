@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="main">
     <h1>Voice Text音声合成</h1>
     <form action="">
       <div>
@@ -88,7 +88,9 @@
           </li>
         </ul>
       </div>
-      <button type="submit" v-on:click="test">送信</button>
+      <div id="send-button">
+        <button type="submit" v-on:click="test">送信</button>
+      </div>
     </form>
   </div>
 </template>
@@ -128,4 +130,26 @@ export default class Main extends Vue {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+#main {
+  width: 80%;
+  margin: auto;
+}
+
+#main h1,
+#send-button {
+  text-align: center;
+}
+
+#send-button button {
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+ul li,
+label,
+span {
+  margin: 10px;
+}
+</style>
