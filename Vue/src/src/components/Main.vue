@@ -14,7 +14,13 @@
           </li>
           <li>
             <label for="">スピーカー</label>
-            <select name="speaker" id="" v-model="speaker" required>
+            <select
+              name="speaker"
+              id=""
+              v-model="speaker"
+              @change="changeSpeaker"
+              required
+            >
               <option value="" disabled selected>選択して下さい</option>
               <option value="show">ショウ</option>
               <option value="haruka">ハルカ</option>
@@ -26,7 +32,12 @@
           </li>
           <li>
             <label for="">感情</label>
-            <select name="emotion" id="" v-model="emotion">
+            <select
+              name="emotion"
+              id=""
+              v-model="emotion"
+              v-bind:disabled="isShow"
+            >
               <option value="" disabled selected>選択して下さい</option>
               <option value="happiness">喜</option>
               <option value="anger">怒</option>
@@ -117,6 +128,8 @@ export default class Main extends Vue {
   private speed = 100;
   /** ボリューム */
   private volume = 100;
+  /** 選択されたスピーカーがショウかどうか(ショウだと感情設定ができない) */
+  private isShow = false;
 
   private voiceText: any;
   constructor() {
@@ -125,6 +138,14 @@ export default class Main extends Vue {
 
   test() {
     alert(`apiKey : ${this.apiKey}`);
+  }
+
+  changeSpeaker() {
+    if (this.speaker == "show") {
+      this.isShow = true;
+      return;
+    }
+    this.isShow = false;
   }
 }
 </script>
