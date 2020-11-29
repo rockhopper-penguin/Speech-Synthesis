@@ -136,8 +136,13 @@ export default class Main extends Vue {
     super();
   }
 
-  test() {
-    alert(`apiKey : ${this.apiKey}`);
+  async test() {
+    // alert(`apiKey : ${this.apiKey}`);
+    const voiceText = await new VoiceText(this.text);
+    const test = await voiceText.test();
+    if (test) {
+      alert("Test method execution is successfull");
+    }
   }
 
   changeSpeaker() {
