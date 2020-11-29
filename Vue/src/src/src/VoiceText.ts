@@ -6,5 +6,6 @@ export default class VoiceText {
 
     test() {
         alert(`text -> ${this.text}`);
+        return true
     }
 }
