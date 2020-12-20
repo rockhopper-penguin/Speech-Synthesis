@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export default class VoiceText {
     private text: string | undefined;
     constructor(text: string) {
